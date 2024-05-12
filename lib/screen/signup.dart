@@ -1,15 +1,18 @@
+// SignUp
+
 import 'package:flutter/material.dart';
 import 'package:study/screen/homescreen.dart';
+import 'package:study/screen/login.dart';
 import 'package:study/screen/signup.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -21,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _login() {
+  void _signup() {
     if (_formKey.currentState!.validate()) {
       // Perform login logic
       print("Username: ${_usernameController.text}");
@@ -43,10 +46,9 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset("assets/images/book.png"),
               const SizedBox(height: 20),
               const Text(
-                "Welcome Back!",
+                "Welcome!",
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -62,19 +64,66 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
-                  labelText: 'Username',
-                  suffixIcon: Icon(Icons.email),
+                  labelText: 'Name',
+                  suffixIcon: Icon(Icons.person),
                   // border: OutlineInputBorder(),
-                  hintText: 'Enter your username',
+                  hintText: 'Enter your name',
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your username';
+                    return 'Please enter your name';
                   }
                   return null;
                 },
               ),
-              // const SizedBox(height: 12),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  // border: OutlineInputBorder(),
+                  suffixIcon: Icon(Icons.email),
+                  hintText: 'Enter your Emaol',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Email';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Date Of Birth',
+                  // border: OutlineInputBorder(),
+                  suffixIcon: Icon(Icons.calendar_month),
+                  hintText: 'Enter your Date Of Birth',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Date Of Birth';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Phone',
+                  // border: OutlineInputBorder(),
+                  suffixIcon: Icon(Icons.call),
+                  hintText: 'Enter your Phone',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Phone No.';
+                  }
+                  return null;
+                },
+              ),
               TextFormField(
                 controller: _passwordController,
                 obscureText: true,
@@ -91,25 +140,32 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
               ),
-              InkWell(
-                onTap: () {},
-                child: Text(
-                  "Forget Password?",
-                  style: TextStyle(color: Colors.redAccent),
-                  textAlign: TextAlign.end,
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                  // border: OutlineInputBorder(),
+                  suffixIcon: Icon(Icons.password),
+                  hintText: 'Enter your Confirm password',
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Confirm password';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _login,
+                onPressed: _signup,
                 child: const Text(
-                  "LogIn",
+                  "Signup",
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.redAccent,
-                  // Button color
-                  onPrimary: Colors.black, // Text color
+                  foregroundColor: Colors.black,
+                  primary: Colors.redAccent, // Text color
                 ),
               ),
 
@@ -151,14 +207,14 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an Account? "),
+                  Text("Already have an Account? "),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => SignUp()));
+                          MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                     child: Text(
-                      "Sign up",
+                      "Login",
                       style: TextStyle(
                           color: Colors.redAccent,
                           fontWeight: FontWeight.bold,
